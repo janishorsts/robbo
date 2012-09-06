@@ -1,0 +1,52 @@
+body {
+  background: #ddd;
+}
+@mixin icon($x, $y) {
+  width: 32px;
+  height: 32px;
+  display: inline-block;
+  background: url('../img/icons32.png') (-2 - $x*34px) (-2 - $y*34px) no-repeat;
+}
+
+@mixin icon-animate($x, $y) {
+  @include icon($x, $y);
+  &.animate {
+    background-position: (-2 - ($x+1)*34px) (-2 - $y*34px);
+  }
+}
+
+.robbo.right {
+  @include icon-animate(0, 5);
+}
+
+.robbo.down {
+  @include icon-animate(2, 5);
+}
+
+.robbo.left {
+  @include icon-animate(4, 5);
+}
+
+.robbo.up {
+  @include icon-animate(6, 5);
+}
+
+.bear {
+  @include icon-animate(1, 1);
+}
+
+.bear-black {
+  @include icon-animate(6, 2);
+}
+
+.bird {
+  @include icon-animate(3, 1);
+}
+
+.capsule {
+  @include icon-animate(5, 1)
+}
+
+.butterfly {
+  @include icon-animate(8, 2);
+}
