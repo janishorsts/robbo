@@ -1,17 +1,255 @@
 body {
   background: #ddd;
 }
-@mixin icon($x, $y) {
+
+@mixin icon-pos($x, $y) {
+  background: url('../img/icons32.png') (-2 - $x*34px) (-2 - $y*34px) no-repeat;
+}
+
+@mixin icon-blank {
   width: 32px;
   height: 32px;
   display: inline-block;
-  background: url('../img/icons32.png') (-2 - $x*34px) (-2 - $y*34px) no-repeat;
+}
+
+@mixin icon($x, $y) {
+  @include icon-blank;
+  @include icon-pos($x, $y);
 }
 
 @mixin icon-animate($x, $y) {
   @include icon($x, $y);
-  &.animate {
-    background-position: (-2 - ($x+1)*34px) (-2 - $y*34px);
+  &.animate-one {
+    @include icon-pos($x+1, $y);
+  }
+}
+
+
+.empty {
+  @include icon-blank;
+}
+
+.wall {
+  @include icon(2, 0);
+
+  &.red {
+    @include icon-pos(3, 0);
+  }
+
+  &.green {
+    @include icon-pos(5, 2);
+  }
+
+  &.black {
+    @include icon-pos(7, 1);
+  }
+
+  &.fat {
+    @include icon-pos(9, 1);
+  }
+
+  &.round {
+    @include icon-pos(8, 5);
+  }
+
+  &.boulder {
+    @include icon-pos(9, 5);
+  }
+
+  &.square {
+    @include icon-pos(10, 0);
+  }
+
+  &.lattice {
+    @include icon-pos(10, 1);
+  }
+}
+
+.screw {
+  @include icon(4, 0);
+}
+
+.bullet {
+  @include icon(5, 0);
+}
+
+.box {
+  @include icon(6, 0);
+
+  &.push {
+    @include icon(6, 6);
+  }
+}
+
+.key {
+  @include icon(7, 0);
+}
+
+.bomb {
+  @include icon(8, 0);
+
+  &.purple {
+    @include icon(7, 6);
+  }
+}
+
+.door {
+  @include icon(9, 0);
+}
+
+.question {
+  @include icon(0, 1);
+}
+
+.boom {
+  &.little {
+    @include icon(1, 2);
+
+    &.animate-one {
+      @include icon-pos(2, 2);
+    }
+
+    &.animate-two {
+      @include icon-pos(3, 2);
+    }
+
+    &.animate-three {
+      @include icon-pos(4, 2);
+    }
+  }
+
+  &.big {
+    @include icon(0, 7);
+
+    &.animate-one {
+      @include icon-pos(1, 7);
+    }
+
+    &.animate-two {
+      @include icon-pos(2, 7);
+    }
+
+    &.animate-three {
+      @include icon-pos(3, 7);
+    }
+
+    &.animate-four {
+      @include icon-pos(4, 7);
+    }
+  }
+}
+
+.ground {
+  @include icon(5, 6);
+}
+
+.teleport {
+  @include icon-animate(0, 4);
+}
+
+.teleporting {
+  @include icon(10, 3);
+
+  &.animate-one {
+    @include icon-pos(10, 4);
+  }
+
+  &.animate-two {
+    @include icon-pos(10, 5);
+  }
+
+  &.animate-three {
+    @include icon-pos(10, 6);
+  }
+
+  &.animate-four {
+    @include icon-pos(10, 7);
+  }
+}
+
+.gun {
+  @include icon-blank;
+
+  &.up {
+    @include icon-pos(8, 4);
+  }
+
+  &.right {
+    @include icon-pos(5, 4);
+  }
+
+  &.down {
+    @include icon-pos(6, 4);
+  }
+
+  &.left {
+    @include icon-pos(7, 4);
+  }
+
+  &.big {
+    &.up {
+      @include icon-pos(8, 6);
+    }
+
+    &.right {
+      @include icon-pos(8, 7);
+    }
+
+    &.down {
+      @include icon-pos(9, 6);
+    }
+
+    &.left {
+      @include icon-pos(9, 7);
+    }
+  }
+}
+
+.magnet {
+  @include icon-blank;
+
+  &.up {
+    @include icon-pos(1, 6);
+  }
+
+  &.right {
+    @include icon-pos(0, 0);
+  }
+
+  &.down {
+    @include icon-pos(0, 6);
+  }
+
+  &.left {
+    @include icon-pos(1, 0);
+  }
+}
+
+.blaster {
+  @include icon(2, 4);
+
+  &.animate-one {
+    @include icon-pos(3, 4);
+  }
+
+  &.animate-two {
+    @include icon-pos(4, 4);
+  }
+
+  &.animate-three {
+    @include icon-pos(3, 4);
+  }
+
+  &.animate-four {
+    @include icon-pos(2, 4);
+  }
+}
+
+.barrier {
+  @include icon(9, 3);
+
+  &.other {
+    @include icon-pos(9, 4);
   }
 }
 

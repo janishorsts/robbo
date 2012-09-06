@@ -2,14 +2,14 @@
 # The humans responsible & technology colophon
 
 # TEAM
-
-    <name> -- <role> -- <twitter>
+    Ian Horst -- lead -- @ianhorst
 
 # THANKS
 
-    <name>
+    Janusz Pelc
 
 # TECHNOLOGY COLOPHON
 
-    HTML5, CSS3
+    HTML5, CSS3,
+    Sass,
     jQuery, Modernizr
