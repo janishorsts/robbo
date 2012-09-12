@@ -253,28 +253,30 @@ body {
   }
 }
 
-.robbo.right {
-  @include icon-animate(0, 5);
-}
+.robbo {
+  &.right {
+    @include icon-animate(0, 5);
+  }
 
-.robbo.down {
-  @include icon-animate(2, 5);
-}
+  &.down {
+    @include icon-animate(2, 5);
+  }
 
-.robbo.left {
-  @include icon-animate(4, 5);
-}
+  &.left {
+    @include icon-animate(4, 5);
+  }
 
-.robbo.up {
-  @include icon-animate(6, 5);
+  &.up {
+    @include icon-animate(6, 5);
+  }
 }
 
 .bear {
   @include icon-animate(1, 1);
-}
 
-.bear-black {
-  @include icon-animate(6, 2);
+  &.black {
+    @include icon-animate(6, 2);
+  }
 }
 
 .bird {
