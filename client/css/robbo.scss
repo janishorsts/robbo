@@ -3,7 +3,7 @@ body {
 }
 
 @mixin icon-pos($x, $y) {
-  background: url('../img/icons32.png') (-2 - $x*34px) (-2 - $y*34px) no-repeat;
+  background: url('/img/icons32.png') (-2 - $x*34px) (-2 - $y*34px) no-repeat;
 }
 
 @mixin icon-blank {
@@ -284,7 +284,7 @@ body {
 }
 
 .capsule {
-  @include icon-animate(5, 1)
+  @include icon-animate(5, 1);
 }
 
 .butterfly {
