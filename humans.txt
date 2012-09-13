@@ -1,0 +1,15 @@
+# humanstxt.org/
+# The humans responsible & technology colophon
+
+# TEAM
+    Ian Horst -- lead -- @ianhorst
+
+# THANKS
+
+    Janusz Pelc
+
+# TECHNOLOGY COLOPHON
+
+    HTML5, CSS3,
+    Sass,
+    Meteor, CoffeeScript, jQuery, Modernizr
