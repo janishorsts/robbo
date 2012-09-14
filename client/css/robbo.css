@@ -1,15 +1,16 @@
-body {
-  background: #ddd; }
+#level {
+  background: #ddd;
+  margin: 0 auto; }
 
 .empty {
   width: 32px;
   height: 32px;
-  display: inline-block; }
+  float: left; }
 
 .wall {
   width: 32px;
   height: 32px;
-  display: inline-block;
+  float: left;
   background: url("/img/icons32.png") -70px -2px no-repeat; }
   .wall.red {
     background: url("/img/icons32.png") -104px -2px no-repeat; }
@@ -31,59 +32,59 @@ body {
 .screw {
   width: 32px;
   height: 32px;
-  display: inline-block;
+  float: left;
   background: url("/img/icons32.png") -138px -2px no-repeat; }
 
 .bullet {
   width: 32px;
   height: 32px;
-  display: inline-block;
+  float: left;
   background: url("/img/icons32.png") -172px -2px no-repeat; }
 
 .box {
   width: 32px;
   height: 32px;
-  display: inline-block;
+  float: left;
   background: url("/img/icons32.png") -206px -2px no-repeat; }
   .box.push {
     width: 32px;
     height: 32px;
-    display: inline-block;
+    float: left;
     background: url("/img/icons32.png") -206px -206px no-repeat; }
 
 .key {
   width: 32px;
   height: 32px;
-  display: inline-block;
+  float: left;
   background: url("/img/icons32.png") -240px -2px no-repeat; }
 
 .bomb {
   width: 32px;
   height: 32px;
-  display: inline-block;
+  float: left;
   background: url("/img/icons32.png") -274px -2px no-repeat; }
   .bomb.purple {
     width: 32px;
     height: 32px;
-    display: inline-block;
+    float: left;
     background: url("/img/icons32.png") -240px -206px no-repeat; }
 
 .door {
   width: 32px;
   height: 32px;
-  display: inline-block;
+  float: left;
   background: url("/img/icons32.png") -308px -2px no-repeat; }
 
 .question {
   width: 32px;
   height: 32px;
-  display: inline-block;
+  float: left;
   background: url("/img/icons32.png") -2px -36px no-repeat; }
 
 .boom.little {
   width: 32px;
   height: 32px;
-  display: inline-block;
+  float: left;
   background: url("/img/icons32.png") -36px -70px no-repeat; }
   .boom.little.animate-one {
     background: url("/img/icons32.png") -70px -70px no-repeat; }
@@ -94,7 +95,7 @@ body {
 .boom.big {
   width: 32px;
   height: 32px;
-  display: inline-block;
+  float: left;
   background: url("/img/icons32.png") -2px -240px no-repeat; }
   .boom.big.animate-one {
     background: url("/img/icons32.png") -36px -240px no-repeat; }
@@ -108,13 +109,13 @@ body {
 .ground {
   width: 32px;
   height: 32px;
-  display: inline-block;
+  float: left;
   background: url("/img/icons32.png") -172px -206px no-repeat; }
 
 .teleport {
   width: 32px;
   height: 32px;
-  display: inline-block;
+  float: left;
   background: url("/img/icons32.png") -2px -138px no-repeat; }
   .teleport.animate-one {
     background: url("/img/icons32.png") -36px -138px no-repeat; }
@@ -122,7 +123,7 @@ body {
 .teleporting {
   width: 32px;
   height: 32px;
-  display: inline-block;
+  float: left;
   background: url("/img/icons32.png") -342px -104px no-repeat; }
   .teleporting.animate-one {
     background: url("/img/icons32.png") -342px -138px no-repeat; }
@@ -136,7 +137,7 @@ body {
 .gun {
   width: 32px;
   height: 32px;
-  display: inline-block; }
+  float: left; }
   .gun.up {
     background: url("/img/icons32.png") -274px -138px no-repeat; }
   .gun.right {
@@ -157,7 +158,7 @@ body {
 .magnet {
   width: 32px;
   height: 32px;
-  display: inline-block; }
+  float: left; }
   .magnet.up {
     background: url("/img/icons32.png") -36px -206px no-repeat; }
   .magnet.right {
@@ -170,7 +171,7 @@ body {
 .blaster {
   width: 32px;
   height: 32px;
-  display: inline-block;
+  float: left;
   background: url("/img/icons32.png") -70px -138px no-repeat; }
   .blaster.animate-one {
     background: url("/img/icons32.png") -104px -138px no-repeat; }
@@ -184,7 +185,7 @@ body {
 .barrier {
   width: 32px;
   height: 32px;
-  display: inline-block;
+  float: left;
   background: url("/img/icons32.png") -308px -104px no-repeat; }
   .barrier.other {
     background: url("/img/icons32.png") -308px -138px no-repeat; }
@@ -192,28 +193,28 @@ body {
 .robbo.right {
   width: 32px;
   height: 32px;
-  display: inline-block;
+  float: left;
   background: url("/img/icons32.png") -2px -172px no-repeat; }
   .robbo.right.animate-one {
     background: url("/img/icons32.png") -36px -172px no-repeat; }
 .robbo.down {
   width: 32px;
   height: 32px;
-  display: inline-block;
+  float: left;
   background: url("/img/icons32.png") -70px -172px no-repeat; }
   .robbo.down.animate-one {
     background: url("/img/icons32.png") -104px -172px no-repeat; }
 .robbo.left {
   width: 32px;
   height: 32px;
-  display: inline-block;
+  float: left;
   background: url("/img/icons32.png") -138px -172px no-repeat; }
   .robbo.left.animate-one {
     background: url("/img/icons32.png") -172px -172px no-repeat; }
 .robbo.up {
   width: 32px;
   height: 32px;
-  display: inline-block;
+  float: left;
   background: url("/img/icons32.png") -206px -172px no-repeat; }
   .robbo.up.animate-one {
     background: url("/img/icons32.png") -240px -172px no-repeat; }
@@ -221,14 +222,14 @@ body {
 .bear {
   width: 32px;
   height: 32px;
-  display: inline-block;
+  float: left;
   background: url("/img/icons32.png") -36px -36px no-repeat; }
   .bear.animate-one {
     background: url("/img/icons32.png") -70px -36px no-repeat; }
   .bear.black {
     width: 32px;
     height: 32px;
-    display: inline-block;
+    float: left;
     background: url("/img/icons32.png") -206px -70px no-repeat; }
     .bear.black.animate-one {
       background: url("/img/icons32.png") -240px -70px no-repeat; }
@@ -236,7 +237,7 @@ body {
 .bird {
   width: 32px;
   height: 32px;
-  display: inline-block;
+  float: left;
   background: url("/img/icons32.png") -104px -36px no-repeat; }
   .bird.animate-one {
     background: url("/img/icons32.png") -138px -36px no-repeat; }
@@ -244,7 +245,7 @@ body {
 .capsule {
   width: 32px;
   height: 32px;
-  display: inline-block;
+  float: left;
   background: url("/img/icons32.png") -172px -36px no-repeat; }
   .capsule.animate-one {
     background: url("/img/icons32.png") -206px -36px no-repeat; }
@@ -252,7 +253,7 @@ body {
 .butterfly {
   width: 32px;
   height: 32px;
-  display: inline-block;
+  float: left;
   background: url("/img/icons32.png") -274px -70px no-repeat; }
   .butterfly.animate-one {
     background: url("/img/icons32.png") -308px -70px no-repeat; }

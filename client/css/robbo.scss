@@ -1,5 +1,6 @@
-body {
+#level {
   background: #ddd;
+  margin: 0 auto;
 }
 
 @mixin icon-pos($x, $y) {
@@ -9,7 +10,7 @@ body {
 @mixin icon-blank {
   width: 32px;
   height: 32px;
-  display: inline-block;
+  float: left;
 }
 
 @mixin icon($x, $y) {
