@@ -2,6 +2,7 @@ class Level extends Backbone.View
   el: '#level'
 
   initialize: (@options) ->
+    console.log @options
     @width = Math.floor @options.size
     @height = Math.floor (@options.size - @width) * 100
 
@@ -49,28 +50,53 @@ class Level extends Backbone.View
 
     _.each @map, (code, index) ->
       switch code
-        when 'a' then icon = new Wall               # S_WALL
-        when 'R' then icon = new Robbo              # ROBBO
-        when '.' then icon = new Empty              # EMPTY
-        when 'O' then icon = new Wall               # WALL
-        when 'Q' then icon = new Wall type: 'red'   # WALL_RED
-        when '%' then icon = new Key                # KEY
-        when '^' then icon = new Bird               # BIRD
-        when 'T' then icon = new Screw              # SCREW
-        when '?' then icon = new Question           # QUESTIONMARK
-        when '&' then icon = new Teleport           # TELEPORT
-        when 'b' then icon = new Bomb               # BOMB
-        when '}' then icon = new Gun                # GUN
-        when 'V' then icon = new Butterfly          # BUTTERFLY
-        when 'H' then icon = new Ground             # GROUND
-        when 'D' then icon = new Door               # DOOR
-        when '@' then icon = new Bear               # BEAR
-        when '!' then icon = new Capsule            # CAPSULE
-        when '*' then icon = new Bear type: 'black' # BEAR_B
+        when 'a' then icon = new Wall level: this                # S_WALL
+        when 'R'
+          icon = new Robbo level: this                           # ROBBO
+          @robbo = icon
+        when '.' then icon = new Empty level: this               # EMPTY
+        when 'O' then icon = new Wall level: this                # WALL
+        when 'Q' then icon = new Wall type: 'red'                # WALL_RED
+        when '%' then icon = new Key level: this                 # KEY
+        when '^' then icon = new Bird level: this                # BIRD
+        when 'T' then icon = new Screw level: this               # SCREW
+        when '?' then icon = new Question level: this            # QUESTIONMARK
+        when '&' then icon = new Teleport level: this            # TELEPORT
+        when 'b' then icon = new Bomb level: this                # BOMB
+        when '}' then icon = new Gun level: this                 # GUN
+        when 'V' then icon = new Butterfly level: this           # BUTTERFLY
+        when 'H' then icon = new Ground level: this              # GROUND
+        when 'D' then icon = new Door level: this                # DOOR
+        when '@' then icon = new Bear level: this                # BEAR
+        when '!' then icon = new Capsule level: this             # CAPSULE
+        when '*' then icon = new Bear level: this, type: 'black' # BEAR_B
+        when 'M' then icon = new Magnet level: this              # MAGNET
+        when '#' then icon = new Box level: this                 # BOX
+        when '~' then icon = new Box type: 'push'                # PUSH_BOX
+        when '+' then icon = new Empty level: this               # EMPTY_FIELD
+        when "'" then icon = new Bullet level: this              # BULLET
+        when '=' then icon = new Barrier level: this             # BARRIER
         else throw '"unknown icon: ' + code + '"'
 
       @map[index] = icon
     , this
+
+    setInterval =>
+      $('.bear, .teleport, .bird, .butterfly').toggleClass 'animate-one'
+      @act()
+    , 200
+
+
+    $(document).on 'keydown', (e) =>
+      directions = '37': 'left', '38': 'up', '39': 'right', '40': 'down'
+      direction = directions[e.keyCode ? e.which]
+      if direction then @robbo.step(direction)
+
+      marginTop = (5 - Math.floor(@robbo.$el.index() / @width))
+      marginTop = 0 if marginTop > 0
+      marginTop = (11 - @height) if marginTop  < 11 - @height
+
+      @$el.css 'marginTop', marginTop * 32
 
   render: ->
     this.$el.css width: 32 * @width
@@ -82,8 +108,7 @@ class Level extends Backbone.View
 
   act: ->
     _.each @map, (icon) ->
-      icon.act this
-    , this
+      icon.act()
 
   leftIcon: (icon) ->
     icon.$el.prev().data 'icon'
@@ -111,10 +136,10 @@ class LevelLoader
         \[author\]\n*([\s\S]*?)\n*
         \[data\]\n*([\s\S]*?)\n*
         \[additional\]\n*([\s\S]*?)\n*
+        \[end\]
       ///
 
-
-      [ignore, offset, level, color, ignore, notes, size, author, data, additional] = levels[1].match re
+      [ignore, offset, level, color, ignore, notes, size, author, data, additional] = levels[0].match re
 
       level = new Level({
         offset: offset,
@@ -129,9 +154,3 @@ class LevelLoader
 
       level.render()
 
-
-
-      setInterval ->
-        $('.bear, .teleport, .robbo, .bird, .butterfly').toggleClass 'animate-one'
-        level.act()
-      , 250

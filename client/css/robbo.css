@@ -2,6 +2,11 @@
   background: #ddd;
   margin: 0 auto; }
 
+#view {
+  height: 384px;
+  overflow: hidden;
+  margin-top: 32px; }
+
 .empty {
   width: 32px;
   height: 32px;

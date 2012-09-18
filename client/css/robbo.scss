@@ -3,6 +3,12 @@
   margin: 0 auto;
 }
 
+#view {
+  height: 12*32px;
+  overflow: hidden;
+  margin-top: 32px;
+}
+
 @mixin icon-pos($x, $y) {
   background: url('/img/icons32.png') (-2 - $x*34px) (-2 - $y*34px) no-repeat;
 }

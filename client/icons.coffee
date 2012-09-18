@@ -7,6 +7,7 @@ class Icon
     @initialize()
   initialize: ->
   act: ->
+  touch: (direction) ->
   isEmpty: ->
     false
   swap: (dst) ->
@@ -19,24 +20,26 @@ class Icon
       this.$el.before dst.$el
       next.before @$el
 
+class Barrier extends Icon
+  initialize: ->
+    @$el.addClass 'barrier'
+
 class Bear extends Icon
   initialize: ->
     @$el.addClass 'bear ' + (@options.type ? '')
     @direction = 'left'
-  act: (level) ->
+  act: ->
     moves = {
-      left:  ['down', 'left', 'up', 'right'],
-      up:    ['left', 'up', 'right', 'down'],
-      right: ['up', 'right', 'down', 'left'],
-      down:  ['right', 'down', 'left', 'up']
+      left:  ['down',  'left',  'up',    'right'],
+      up:    ['left',  'up',    'right', 'down'],
+      right: ['up',    'right', 'down',  'left'],
+      down:  ['right', 'down',  'left',  'up']
     }
 
     direction = null
 
-    directions = moves[@direction]
-
-    _.every directions, (move) ->
-      if level[move + 'Icon'](this).isEmpty()
+    _.every moves[@direction], (move) ->
+      if @options.level[move + 'Icon'](this).isEmpty()
         direction = move
         return false
       true
@@ -44,27 +47,43 @@ class Bear extends Icon
 
     @direction = direction ? 'left'
 
-    if direction then this.swap level[direction + 'Icon'](this)
+    if direction then this.swap @options.level[direction + 'Icon'](this)
 
 
 class Bird extends Icon
   initialize: ->
     @direction = 'down'
     @$el.addClass 'bird'
-  act: (level) ->
-    up = level.upIcon(this)
-    down = level.downIcon(this)
+  act: ->
+    up = @options.level.upIcon(this)
+    down = @options.level.downIcon(this)
 
     if (@direction == 'down' and down.isEmpty()) or (@direction == 'up' and up.isEmpty() == false)
       @direction = 'down'
-      this.swap down
+      if down.isEmpty() then this.swap down
     else if (@direction == 'down' and down.isEmpty() == false) or (@direction == 'up' and up.isEmpty())
       @direction = 'up'
-      this.swap up
+      if up.isEmpty() then this.swap up
 
 class Bomb extends Icon
   initialize: ->
     @$el.addClass 'bomb'
+  touch: (direction) ->
+    icon = @options.level[direction + 'Icon'](this)
+    if icon.isEmpty()
+      this.swap icon
+
+class Box extends Icon
+  initialize: ->
+    @$el.addClass 'box'
+  touch: (direction) ->
+    icon = @options.level[direction + 'Icon'](this)
+    if icon.isEmpty()
+      this.swap icon
+
+class Bullet extends Icon
+  initialize: ->
+    @$el.addClass 'bullet'
 
 class Butterfly extends Icon
   initialize: ->
@@ -90,11 +109,19 @@ class Ground extends Icon
 
 class Gun extends Icon
   initialize: ->
-    @$el.addClass 'gun'
+    @$el.addClass 'gun up'
 
 class Key extends Icon
   initialize: ->
     @$el.addClass 'key'
+  touch: (direction) ->
+    empty = new Empty
+    @$el.before empty.$el
+    @$el.remove()
+
+class Magnet extends Icon
+  initialize: ->
+    @$el.addClass 'magnet left'
 
 class Question extends Icon
   initialize: ->
@@ -102,15 +129,24 @@ class Question extends Icon
 
 class Robbo extends Icon
   initialize: ->
-    @$el.addClass 'robbo up'
-  up: ->
-  down: ->
-  left: ->
-  right: ->
+    @$el.addClass 'robbo down'
+  step: (direction) ->
+    this.$el.removeClass('left right up down').addClass(direction).toggleClass('animate-one')
+    icon = @options.level[direction + 'Icon'](this)
+    if (icon.isEmpty())
+      this.swap icon
+    else
+      icon.touch direction
+      icon = @options.level[direction + 'Icon'](this)
+      if icon.isEmpty() then this.swap icon
 
 class Screw extends Icon
   initialize: ->
     @$el.addClass 'screw'
+  touch: (direction) ->
+    empty = new Empty
+    @$el.before empty.$el
+    @$el.remove()
 
 class Teleport extends Icon
   initialize: ->
