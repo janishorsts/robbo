@@ -1,4 +1,11 @@
-class Icon extends Backbone.View
+class Icon
+  constructor: (options) ->
+    @options = options ? {}
+    @$el = $('<div></div>')
+    @$el.data 'icon', this
+    @cid = _.uniqueId('i')
+    @initialize()
+  initialize: ->
   act: ->
   isEmpty: ->
     false
@@ -12,72 +19,36 @@ class Icon extends Backbone.View
       this.$el.before dst.$el
       next.before @$el
 
-
 class Bear extends Icon
   initialize: ->
-    @$el.data 'icon', this
     @$el.addClass 'bear ' + (@options.type ? '')
     @direction = 'left'
   act: (level) ->
-    up = level.upIcon(this)
-    down = level.downIcon(this)
-    left = level.leftIcon(this)
-    right = level.rightIcon(this)
+    moves = {
+      left:  ['down', 'left', 'up', 'right'],
+      up:    ['left', 'up', 'right', 'down'],
+      right: ['up', 'right', 'down', 'left'],
+      down:  ['right', 'down', 'left', 'up']
+    }
 
     direction = null
 
-    switch @direction
-      when 'left'
-        if down.isEmpty()
-          direction = 'down'
-        else if left.isEmpty()
-          direction = 'left'
-        else if up.isEmpty()
-          direction = 'up'
-        else if right.isEmpty()
-          direction = 'right'
-      when 'up'
-        if left.isEmpty()
-          direction = 'left'
-        else if up.isEmpty()
-          direction = 'up'
-        else if right.isEmpty()
-          direction = 'right'
-        else if down.isEmpty()
-          direction = 'down'
-      when 'right'
-        if up.isEmpty()
-          direction = 'up'
-        else if right.isEmpty()
-          direction = 'right'
-        else if down.isEmpty()
-          direction = 'down'
-        else if left.isEmpty()
-          direction = 'left'
-      when 'down'
-        if right.isEmpty()
-          direction = 'right'
-        else if down.isEmpty()
-          direction = 'down'
-        else if left.isEmpty()
-          direction = 'left'
-        else if up.isEmpty()
-          direction = 'up'
+    directions = moves[@direction]
 
-    switch direction
-      when 'left' then empty = left
-      when 'up' then empty = up
-      when 'down' then empty = down
-      when 'right' then empty = right
+    _.every directions, (move) ->
+      if level[move + 'Icon'](this).isEmpty()
+        direction = move
+        return false
+      true
+    , this
 
     @direction = direction ? 'left'
 
-    if direction then this.swap empty
+    if direction then this.swap level[direction + 'Icon'](this)
 
 
 class Bird extends Icon
   initialize: ->
-    @$el.data 'icon', this
     @direction = 'down'
     @$el.addClass 'bird'
   act: (level) ->
@@ -93,54 +64,44 @@ class Bird extends Icon
 
 class Bomb extends Icon
   initialize: ->
-    @$el.data 'icon', this
     @$el.addClass 'bomb'
 
 class Butterfly extends Icon
   initialize: ->
-    @$el.data 'icon', this
     @$el.addClass 'butterfly'
 
 class Capsule extends Icon
   initialize: ->
-    @$el.data 'icon', this
     @$el.addClass 'capsule'
 
 class Door extends Icon
   initialize: ->
-    @$el.data 'icon', this
     @$el.addClass 'door'
 
 class Empty extends Icon
   initialize: ->
-    @$el.data 'icon', this
     @$el.addClass 'empty'
   isEmpty: ->
     true
 
 class Ground extends Icon
   initialize: ->
-    @$el.data 'icon', this
     @$el.addClass 'ground'
 
 class Gun extends Icon
   initialize: ->
-    @$el.data 'icon', this
     @$el.addClass 'gun'
 
 class Key extends Icon
   initialize: ->
-    @$el.data 'icon', this
     @$el.addClass 'key'
 
 class Question extends Icon
   initialize: ->
-    @$el.data 'icon', this
     @$el.addClass 'question'
 
 class Robbo extends Icon
   initialize: ->
-    @$el.data 'icon', this
     @$el.addClass 'robbo up'
   up: ->
   down: ->
@@ -149,16 +110,12 @@ class Robbo extends Icon
 
 class Screw extends Icon
   initialize: ->
-    @$el.data 'icon', this
     @$el.addClass 'screw'
 
 class Teleport extends Icon
   initialize: ->
-    @$el.data 'icon', this
     @$el.addClass 'teleport'
 
 class Wall extends Icon
   initialize: ->
-    @$el.data 'icon', this
     @$el.addClass 'wall ' + (@options.type ? '')
-

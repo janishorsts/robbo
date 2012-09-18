@@ -132,6 +132,6 @@ class LevelLoader
 
 
       setInterval ->
-        $('.bear, .teleport, .capsule, .robbo, .bird, .butterfly').toggleClass 'animate-one'
+        $('.bear, .teleport, .robbo, .bird, .butterfly').toggleClass 'animate-one'
         level.act()
       , 250
