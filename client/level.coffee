@@ -6,6 +6,8 @@ class Level extends Backbone.View
     @width = Math.floor @options.size
     @height = Math.floor (@options.size - @width) * 100
 
+    @robboDirection = null
+
     @map = @options.data.replace(/\n/gm, '').split ''
 
     icons = {
@@ -84,19 +86,22 @@ class Level extends Backbone.View
     setInterval =>
       $('.bear, .teleport, .bird, .butterfly').toggleClass 'animate-one'
       @act()
-    , 200
-
-
-    $(document).on 'keydown', (e) =>
-      directions = '37': 'left', '38': 'up', '39': 'right', '40': 'down'
-      direction = directions[e.keyCode ? e.which]
-      if direction then @robbo.step(direction)
+      if @robboDirection then @robbo.step(@robboDirection)
+      @robboDirection = null
 
       marginTop = (5 - Math.floor(@robbo.$el.index() / @width))
       marginTop = 0 if marginTop > 0
       marginTop = (11 - @height) if marginTop  < 11 - @height
 
       @$el.css 'marginTop', marginTop * 32
+    , 200
+
+
+    $(document).on 'keydown', (e) =>
+      directions = '37': 'left', '38': 'up', '39': 'right', '40': 'down'
+      direction = directions[e.keyCode ? e.which]
+      if direction then @robboDirection = direction
+
 
   render: ->
     this.$el.css width: 32 * @width

@@ -7,8 +7,19 @@
 </head>
 
 <body>
+    {{> intro}}
+    {{> game}}
+</body>
+
+<template name="game">
     <div id="view">
         <div id="level" class="clearfix">
         </div>
     </div>
-</body>
+</template>
+
+<template name="intro">
+    <div id="intro">
+        {{txt_intro_story}}
+    </div>
+</template>
